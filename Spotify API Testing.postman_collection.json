@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "303e1828-ec68-4204-995c-c794c0bcd5f0",
+		"name": "Spotify API Testing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9470586"
+	},
+	"item": [
+		{
+			"name": "api tester",
+			"item": [
+				{
+					"name": "Assertions 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Testing Headers //",
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Successful GET Request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"",
+									"// pm.test(\"Status code name has string\", function () {",
+									"//     pm.response.to.have.status(\"200\");",
+									"// });",
+									"",
+									"// Testing Headers",
+									"pm.test(\"Content-Type is present\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"// pm.test(\"Content-Type header is application/json\", function () {",
+									"//      pm.expect(pm.response.headers.get('Content Type')).to.eql('application/json; charset=utf-8');",
+									"// });",
+									"",
+									"//cookie",
+									"",
+									"pm.test(\"Cookie language is not present\", function () {",
+									"   pm.expect(pm.cookies.has('language')).to.be.false;",
+									"});",
+									"",
+									"// pm.test(\"Cookie language has value 1\", function () {",
+									"//    pm.expect(pm.cookies.get('language')).to.eql('en-gb');",
+									"// });",
+									"",
+									"// response time validation",
+									"pm.test(\"respons time is less than 50ms\", function () {",
+									"   pm.expect(pm.response.responseTime).to.be.below(50);",
+									"});",
+									"",
+									"",
+									"///Test type of any part of the response",
+									"",
+									"const jsonData = pm.response.json();",
+									"// pm.test(\"Test data type of responses\", ()=>{",
+									"//     pm.expect(jsonData).to.be.an(\"object\");",
+									"//     pm.expect(jsonData.name).to.be.a(\"string\");",
+									"//     pm.expect(jsonData.id).to.be.a(\"number\");",
+									"//     pm.expect(jsonData.courses).to.be.an(\"array\");",
+									"// });",
+									"",
+									"// test array content in body",
+									"pm.test(\"Test data type of responses\", ()=>{",
+									"    pm.expect(jsonData.courses).to.include(\"Java\");",
+									"     pm.expect(jsonData.courses).to.have.members([\"Java\",\"Selenium\"]);",
+									"  ",
+									"});",
+									"",
+									"",
+									"// test array content in body",
+									"pm.test(\"values of field in response\", ()=>{",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.id).to.eql(1);",
+									"  ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/posts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"console.log(\"I am folder level script\")"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Get List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Single User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Master\",\n    \"job\": \"Teaching\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"morpheus\",\n    \"job\": \"zion resident\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"console.log(\"I am collection level pre-request\")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "collection_var",
+			"value": "http://localhost:3000/",
+			"type": "string"
+		}
+	]
+}
